@@ -3,6 +3,7 @@ import { computed, watch, ref } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import type { Holding } from '../composables/UsePortfolioSocket'
 import { usePortfolioSocket } from '../composables/UsePortfolioSocket'
+import portfolioModal from '@/components/modals/portfolio-modal.vue'
 
 const auth = useAuthStore()
 let socket: ReturnType<typeof usePortfolioSocket> | null = null
@@ -44,9 +45,10 @@ const totalValue = computed(() =>
       <h1 class="text-2xl font-bold mb-4">My Portfolio</h1>
       <span class="text-2xl font-bold"> ${{ totalValue.toLocaleString() }} </span>
     </div>
-    <table class="w-full border-collapse border border-gray-300">
+    <portfolio-modal />
+    <table class="w-full border-collapse border">
       <thead>
-        <tr class="bg-gray-100">
+        <tr class="bg-[#1B2028]">
           <th class="border border-gray-300 p-2 text-left">Symbol</th>
           <th class="border border-gray-300 p-2 text-right">Amount</th>
           <th class="border border-gray-300 p-2 text-right">Price (USD)</th>

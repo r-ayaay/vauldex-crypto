@@ -17,14 +17,18 @@ class CryptoPriceUpdater(
     private val restTemplate = RestTemplate()
 
     // List of symbols you want to track
-    private val cryptoSymbols = listOf("btc","eth","shib","doge")
+    private val cryptoSymbols = listOf("btc","eth","shib","doge", "ada", "sol", "pepe", "xrp")
 
     // Map symbol to display name
     private val cryptoNames = mapOf(
         "btc" to "Bitcoin",
         "eth" to "Ethereum",
         "shib" to "Shiba Inu",
-        "doge" to "Dogecoin"
+        "doge" to "Dogecoin",
+        "ada" to "Cardano",
+        "sol" to "Solana",
+        "pepe" to "Pepe Coin",
+        "xrp" to "Ripple"
     )
 
     // DTO for deserialization

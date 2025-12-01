@@ -9,6 +9,10 @@ const auth = useAuthStore()
 let socket: ReturnType<typeof usePortfolioSocket> | null = null
 const portfolio = ref<Holding[]>([])
 
+// Track updated cells by holding ID
+const updatedPriceCells = ref<Record<number, boolean>>({})
+const updatedTotalCells = ref<Record<number, boolean>>({})
+
 // Connect WebSocket once user and token are available
 watch(
   () => auth.user,
@@ -17,12 +21,30 @@ watch(
       socket = usePortfolioSocket(auth.token)
       portfolio.value = socket.portfolio.value
 
+      // Watch portfolio changes
       watch(
         () => socket?.portfolio.value,
-        (newVal) => {
-          if (newVal) portfolio.value = newVal
+        (newVal, oldVal) => {
+          if (!newVal || !oldVal) return
+          newVal.forEach((holding, index) => {
+            const oldHolding = oldVal[index]
+            if (!oldHolding) return
+
+            // Highlight price if updated
+            if (holding.currentPrice !== oldHolding.currentPrice) {
+              updatedPriceCells.value[holding.id] = true
+              setTimeout(() => (updatedPriceCells.value[holding.id] = false), 1000)
+            }
+
+            // Highlight total value if updated
+            if (holding.totalValue !== oldHolding.totalValue) {
+              updatedTotalCells.value[holding.id] = true
+              setTimeout(() => (updatedTotalCells.value[holding.id] = false), 1000)
+            }
+          })
+          portfolio.value = newVal
         },
-        { immediate: true },
+        { immediate: true, deep: true },
       )
     }
   },
@@ -41,6 +63,10 @@ const getCoinName = (symbol: string) => {
     ETH: 'Ethereum',
     SHIB: 'Shiba Inu',
     DOGE: 'Dogecoin',
+    ADA: 'Cardano',
+    SOL: 'Solana',
+    PEPE: 'Pepe Coin',
+    XRP: 'Ripple',
   }
   return map[symbol.toUpperCase()] || symbol
 }
@@ -83,8 +109,18 @@ const getCoinImage = (symbol: string) =>
             </div>
           </td>
           <td class="p-4 text-right text-white">{{ holding.amount }}</td>
-          <td class="p-4 text-right text-white">${{ holding.currentPrice.toLocaleString() }}</td>
-          <td class="p-4 text-right text-white">${{ holding.totalValue.toLocaleString() }}</td>
+          <td
+            class="p-4 text-right text-white transition-colors duration-500"
+            :class="{ 'bg-yellow-400/30': updatedPriceCells[holding.id] }"
+          >
+            ${{ holding.currentPrice.toLocaleString() }}
+          </td>
+          <td
+            class="p-4 text-right text-white transition-colors duration-500"
+            :class="{ 'bg-yellow-400/30': updatedTotalCells[holding.id] }"
+          >
+            ${{ holding.totalValue.toLocaleString() }}
+          </td>
         </tr>
         <tr v-if="portfolio.length === 0">
           <td colspan="4" class="text-center p-4 text-gray-500">No holdings yet</td>

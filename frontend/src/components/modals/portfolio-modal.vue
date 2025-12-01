@@ -9,7 +9,7 @@ const auth = useAuthStore()
 const showModal = ref(false)
 const selectedSymbol = ref('BTC')
 const amount = ref(0)
-const symbols = ['BTC', 'ETH', 'SHIB', 'DOGE']
+const symbols = ['BTC', 'ETH', 'SHIB', 'DOGE', 'PEPE', 'XRP', 'ADA', 'SOL']
 
 // Transaction type
 interface Transaction {

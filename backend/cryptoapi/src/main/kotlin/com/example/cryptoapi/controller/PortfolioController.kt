@@ -101,6 +101,58 @@ class PortfolioController(
     }
 
     /** ---------------------------------------------------------
+     *  SELL A HOLDING
+     * --------------------------------------------------------- */
+    @PostMapping("/{userId}/sell")
+    @Transactional
+    fun sellHolding(
+        @PathVariable userId: Long,
+        @Valid @RequestBody request: AddHoldingRequest // reuse symbol & amount
+    ): Portfolio {
+        val user = userRepository.findById(userId)
+            .orElseThrow { IllegalArgumentException("User not found") }
+
+        val symbol = request.symbol.trim().uppercase()
+        val amountToSell = request.amount
+
+        // Validate symbol exists in user's portfolio
+        val existingHolding = portfolioRepository.findByUserIdAndSymbol(user.id, symbol)
+            ?: throw IllegalArgumentException("You don't own any $symbol to sell")
+
+        if (existingHolding.amount < amountToSell) {
+            throw IllegalArgumentException("Not enough $symbol to sell. You have ${existingHolding.amount}")
+        }
+
+        // Validate symbol exists in crypto price table
+        val cryptoPrice = cryptoPriceService.getPriceBySymbol(symbol)
+            ?: throw IllegalArgumentException("Invalid symbol: $symbol")
+
+        // Update holding
+        val updatedHolding = if (existingHolding.amount == amountToSell) {
+            // Remove from portfolio if selling all
+            portfolioRepository.delete(existingHolding)
+            existingHolding.copy(amount = 0.0) // return a copy with 0 for consistency
+        } else {
+            val updated = existingHolding.copy(amount = existingHolding.amount - amountToSell)
+            portfolioRepository.save(updated)
+        }
+
+        // Record SELL transaction
+        transactionRepository.save(
+            Transaction(
+                user = user,
+                symbol = symbol,
+                amount = -amountToSell, // negative for sell
+                type = "SELL",
+                priceUsd = cryptoPrice.priceUsd
+            )
+        )
+
+        return updatedHolding
+    }
+
+
+    /** ---------------------------------------------------------
      *  UPDATE A HOLDING
      * --------------------------------------------------------- */
     @PutMapping("/{portfolioId}")

@@ -8,7 +8,14 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-100: oklch(93.6% 0.032 17.717);
+    --color-red-200: oklch(88.5% 0.062 18.334);
+    --color-red-400: oklch(70.4% 0.191 22.216);
     --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-green-100: oklch(96.2% 0.044 156.743);
+    --color-green-200: oklch(92.5% 0.084 155.995);
+    --color-green-400: oklch(79.2% 0.209 151.711);
+    --color-green-500: oklch(72.3% 0.219 149.579);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-blue-700: oklch(48.8% 0.243 264.376);
     --color-gray-50: oklch(98.5% 0.002 247.839);
@@ -239,14 +246,8 @@
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
-  .h-6 {
-    height: calc(var(--spacing) * 6);
-  }
   .h-16 {
     height: calc(var(--spacing) * 16);
-  }
-  .h-\[32px\] {
-    height: 32px;
   }
   .h-full {
     height: 100%;
@@ -260,14 +261,8 @@
   .w-4 {
     width: calc(var(--spacing) * 4);
   }
-  .w-6 {
-    width: calc(var(--spacing) * 6);
-  }
   .w-64 {
     width: calc(var(--spacing) * 64);
-  }
-  .w-\[32px\] {
-    width: 32px;
   }
   .w-full {
     width: 100%;
@@ -349,10 +344,6 @@
     border-top-style: var(--tw-border-style);
     border-top-width: 1px;
   }
-  .border-b {
-    border-bottom-style: var(--tw-border-style);
-    border-bottom-width: 1px;
-  }
   .border-gray-200 {
     border-color: var(--color-gray-200);
   }
@@ -362,14 +353,17 @@
   .bg-\[\#1B2028\] {
     background-color: #1B2028;
   }
-  .bg-\[\#1C274C\] {
-    background-color: #1C274C;
+  .bg-\[\#1ECB4F\] {
+    background-color: #1ECB4F;
   }
   .bg-\[\#3A6FF8\] {
     background-color: #3A6FF8;
   }
   .bg-\[\#31353F\] {
     background-color: #31353F;
+  }
+  .bg-\[\#F46D22\] {
+    background-color: #F46D22;
   }
   .bg-blue-600 {
     background-color: var(--color-blue-600);
@@ -382,6 +376,12 @@
   }
   .bg-gray-200 {
     background-color: var(--color-gray-200);
+  }
+  .bg-green-100 {
+    background-color: var(--color-green-100);
+  }
+  .bg-red-100 {
+    background-color: var(--color-red-100);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -427,6 +427,9 @@
   }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
+  }
+  .text-center {
+    text-align: center;
   }
   .text-left {
     text-align: left;
@@ -505,27 +508,6 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
-  .hover\:bg-\[\#2f3a6b\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #2f3a6b;
-      }
-    }
-  }
-  .hover\:bg-\[\#3A6FF8\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #3A6FF8;
-      }
-    }
-  }
-  .hover\:bg-\[\#24346c\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #24346c;
-      }
-    }
-  }
   .hover\:bg-\[\#f0f2f8\] {
     &:hover {
       @media (hover: hover) {
@@ -547,6 +529,41 @@
       }
     }
   }
+  .hover\:bg-green-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-green-200);
+      }
+    }
+  }
+  .hover\:bg-green-400 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-green-400);
+      }
+    }
+  }
+  .hover\:bg-green-500 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-green-500);
+      }
+    }
+  }
+  .hover\:bg-red-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-red-200);
+      }
+    }
+  }
+  .hover\:bg-red-400 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-red-400);
+      }
+    }
+  }
   .hover\:bg-white {
     &:hover {
       @media (hover: hover) {
@@ -558,13 +575,6 @@
     &:hover {
       @media (hover: hover) {
         color: #1C274C;
-      }
-    }
-  }
-  .hover\:text-white {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-white);
       }
     }
   }

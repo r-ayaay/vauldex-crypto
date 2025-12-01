@@ -31,7 +31,7 @@ const isActive = (linkTo: string) => {
     <!-- Header -->
     <header class="flex stroke-white items-center gap-2 py-4 h-16">
       <Logo />
-      <h1 class="text-2xl font-semibold">CryptApp</h1>
+      <h1 class="text-2xl font-semibold">CryptoTracker</h1>
     </header>
 
     <!-- Navigation -->

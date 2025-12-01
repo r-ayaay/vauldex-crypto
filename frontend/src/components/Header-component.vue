@@ -35,9 +35,7 @@ onBeforeUnmount(() => {
 <template>
   <header class="flex items-center justify-between h-16 px-6 md:px-8 shadow-sm">
     <header class="">
-      <div class="flex stroke-white items-center gap-2 lg:hidden">
-        <h1 class="text-2xl font-semibold">CryptApp</h1>
-      </div>
+      <div class="flex stroke-white items-center gap-2 lg:hidden"></div>
       <div>
         <h1 class="text-2xl font-semibold">Dashboard</h1>
       </div>

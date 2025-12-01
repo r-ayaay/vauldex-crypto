@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-screen overflow-hidden bg-[#31353F] text-white">
-    <aside class="hidden lg:block md:w-48 w-64 bg-[#1B2028] text-white">
+    <aside class="hidden lg:block md:w-56 bg-[#1B2028] text-white">
       <Sidebar />
     </aside>
 

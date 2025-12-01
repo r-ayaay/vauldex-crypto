@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/raayaay
+    username: raayaay
+    password:   # add your DB password here
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+
+servlet:
+  multipart:
+    max-file-size: 10MB
+    max-request-size: 10MB
+
+server:
+  port: 8080
+
+file:
+  upload-dir: /Users/raayaay/Desktop/rapayaay-10102025/uploads
+
+jwt:
+  secret: c1a7f2d8e4b9a6f0c3d2e1f7b8a9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5g6h7
+  expirationMs: 86400000
+
+coincap:
+  api-key: 81935a52d3e694dabcac6c480273cd9f09d263bd3e34c10955e91b15a13f76db

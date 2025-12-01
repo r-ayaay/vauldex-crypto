@@ -49,7 +49,7 @@ const totalValue = computed(() =>
       </div>
     </div>
 
-    <table class="w-full border-collapse bg-[#1B2028] rounded-xl overflow-hidden">
+    <table class="w-full border bg-[#1B2028] rounded-xl overflow-hidden">
       <thead>
         <tr class="bg-[#2A2F3A]">
           <th class="p-4 text-gray-400 font-thin text-left rounded-tl-xl">Symbol</th>

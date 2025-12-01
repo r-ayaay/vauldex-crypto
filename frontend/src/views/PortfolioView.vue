@@ -40,31 +40,30 @@ const totalValue = computed(() =>
 </script>
 
 <template>
-  <div class="p-4">
-    <div class="flex justify-between">
-      <h1 class="text-2xl font-bold mb-4">My Portfolio</h1>
-      <span class="text-2xl font-bold"> ${{ totalValue.toLocaleString() }} </span>
+  <div class="p-8">
+    <div class="flex justify-between mb-4 flex items-center">
+      <h1 class="text-2xl font-bold">My Portfolio</h1>
+      <div class="flex items-center gap-4">
+        <span class="text-2xl font-bold"> ${{ totalValue.toLocaleString() }} </span>
+        <portfolio-modal />
+      </div>
     </div>
-    <portfolio-modal />
-    <table class="w-full border-collapse border">
+
+    <table class="w-full border-collapse bg-[#1B2028] rounded-xl overflow-hidden">
       <thead>
-        <tr class="bg-[#1B2028]">
-          <th class="border border-gray-300 p-2 text-left">Symbol</th>
-          <th class="border border-gray-300 p-2 text-right">Amount</th>
-          <th class="border border-gray-300 p-2 text-right">Price (USD)</th>
-          <th class="border border-gray-300 p-2 text-right">Total Value (USD)</th>
+        <tr class="bg-[#2A2F3A]">
+          <th class="p-4 text-gray-400 font-thin text-left rounded-tl-xl">Symbol</th>
+          <th class="p-4 text-gray-400 font-thin text-right">Amount</th>
+          <th class="p-4 text-gray-400 font-thin text-right">Price (USD)</th>
+          <th class="p-4 text-gray-400 font-thin text-right rounded-tr-xl">Total Value (USD)</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="holding in portfolio" :key="holding.id" class="hover:bg-gray-50">
-          <td class="border border-gray-300 p-2">{{ holding.symbol }}</td>
-          <td class="border border-gray-300 p-2 text-right">{{ holding.amount }}</td>
-          <td class="border border-gray-300 p-2 text-right">
-            ${{ holding.currentPrice.toLocaleString() }}
-          </td>
-          <td class="border border-gray-300 p-2 text-right">
-            ${{ holding.totalValue.toLocaleString() }}
-          </td>
+        <tr v-for="holding in portfolio" :key="holding.id" class="hover:bg-gray-700">
+          <td class="p-4">{{ holding.symbol }}</td>
+          <td class="p-4 text-right">{{ holding.amount }}</td>
+          <td class="p-4 text-right">${{ holding.currentPrice.toLocaleString() }}</td>
+          <td class="p-4 text-right">${{ holding.totalValue.toLocaleString() }}</td>
         </tr>
       </tbody>
     </table>

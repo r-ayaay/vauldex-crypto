@@ -11,9 +11,7 @@
       </main>
     </div>
   </div>
-  <div class="lg:hidden fixed bottom-0 left-0 w-full z-50 border-t border-gray-200">
-    <BottomNav />
-  </div>
+  <div class="lg:hidden fixed bottom-0 left-0 w-full z-50 border-t border-gray-200"></div>
 </template>
 
 <script setup lang="ts">

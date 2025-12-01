@@ -11,9 +11,6 @@ const selectedSymbol = ref('BTC')
 const amount = ref(0)
 const symbols = ['BTC', 'ETH', 'SHIB', 'DOGE']
 
-const increment = () => (amount.value = Math.round((amount.value + 0.1) * 10) / 10)
-const decrement = () => (amount.value = Math.max(0, Math.round((amount.value - 0.1) * 10) / 10))
-
 // Transaction type
 interface Transaction {
   id: number
@@ -73,41 +70,41 @@ const sell = async () => {
 </script>
 
 <template>
-  <button @click="showModal = true" class="px-4 py-2 bg-blue-500 text-white rounded">
+  <button @click="showModal = true" class="px-4 py-2 bg-blue-500 text-white rounded-lg">
     Open Trade
   </button>
 
   <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-black/50">
-    <div class="bg-white p-6 rounded-lg w-80 relative text-black">
-      <h2 class="text-xl font-bold mb-4">Trade Crypto</h2>
+    <div class="bg-[#1B2028] p-6 rounded-xl w-80 relative text-white shadow-lg">
+      <h2 class="text-xl font-bold mb-4 text-center">Trade Crypto</h2>
 
-      <select v-model="selectedSymbol" class="w-full border border-gray-300 p-2 rounded mb-4">
+      <select
+        v-model="selectedSymbol"
+        class="w-full border border-gray-600 p-2 rounded mb-4 bg-[#2A2F3A] text-white"
+      >
         <option v-for="sym in symbols" :key="sym" :value="sym">{{ sym }}</option>
       </select>
 
-      <div class="flex items-center mb-4">
-        <button @click="decrement" class="px-3 py-1 bg-gray-200 rounded-l">-</button>
-        <input
-          type="number"
-          v-model.number="amount"
-          step="0.1"
-          class="w-full border-t border-b border-gray-300 text-center"
-        />
-        <button @click="increment" class="px-3 py-1 bg-gray-200 rounded-r">+</button>
-      </div>
+      <input
+        type="number"
+        v-model.number="amount"
+        step="0.1"
+        placeholder="Amount"
+        class="w-full border border-gray-600 p-2 rounded mb-4 text-center bg-[#2A2F3A] text-white"
+      />
 
-      <div class="flex justify-between">
-        <button @click="buy" class="px-4 py-2 bg-green-500 text-white rounded w-1/2 mr-2">
+      <div class="flex gap-2">
+        <button @click="buy" class="flex-1 bg-green-500 hover:bg-green-600 p-2 rounded-lg">
           Buy
         </button>
-        <button @click="sell" class="px-4 py-2 bg-red-500 text-white rounded w-1/2 ml-2">
+        <button @click="sell" class="flex-1 bg-red-500 hover:bg-red-600 p-2 rounded-lg">
           Sell
         </button>
       </div>
 
       <button
         @click="showModal = false"
-        class="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+        class="absolute top-2 right-2 text-gray-400 hover:text-white text-lg"
       >
         ✕
       </button>

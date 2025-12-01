@@ -44,7 +44,7 @@ const processedTransactions = computed(() =>
 </script>
 
 <template>
-  <div class="p-4">
+  <div class="p-8">
     <h1 class="text-2xl font-bold mb-4">Transaction History</h1>
     <table class="w-full border-collapse border border-gray-300">
       <thead>
